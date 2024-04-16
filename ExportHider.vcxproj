@@ -127,7 +127,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AuxFunctions.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="OptionsHelper.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AuxFunctions.h" />
+    <ClInclude Include="OptionsHelper.h" />
+    <ClInclude Include="Structs.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

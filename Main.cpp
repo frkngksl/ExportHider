@@ -1,21 +1,17 @@
 #include <Windows.h>
-#include <iostream>
-
-
-
-void PrintBanner() {
-	const char* banner =
-	"   __                       _          _     _                  \n"      
-	"  /__\\_  ___ __   ___  _ __| |_  /\\  /(_) __| | ___ _ __      \n"
-	" /_\\ \\ \\/ / '_ \\ / _ \\| '__| __|/ /_/ / |/ _` |/ _ \\ '__| \n"
-	"//__  >  <| |_) | (_) | |  | |_/ __  /| | (_| |  __/ |          \n"
-	"\\__/ /_/\\_\\ .__/ \\___/|_|   \\__\\/ /_/ |_|\\__,_|\\___|_|  \n"
-	"	  |_|                                                        \n"
-	"		     by @R0h1rr1m							             \n";
-	std::cout << banner << std::endl;
-}
+#include "Structs.h"
+#include "OptionsHelper.h"
+#include "AuxFunctions.h"
 
 int main(int argc, char* argv[]) {
+	OPTIONS configurationOptions;
+	memset(&configurationOptions, 0x00, sizeof(OPTIONS));
 	PrintBanner();
+	if (!ParseArgs(argc, argv, configurationOptions)) {
+		std::cout << "\n[!] Error on parsing arguments. You may have forgotten mandatory options. Use -h for help.\n" << std::endl;
+		return -1;
+	}
+	std::vector<PCHAR> functionNames = ParseInputFile(configurationOptions.inputPath);
+
 	return 0;
 }
