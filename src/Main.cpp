@@ -46,7 +46,7 @@ int main(int argc, char* argv[]) {
 		std::cout << "\n[!] Error on the function name list!\n" << std::endl;
 		return -1;
 	}
-	sprintf(templatePath, "%stemplate\\template.cpp", SOLUTIONDIR);
+	sprintf(templatePath, "%s\\..\\template\\template.cpp", SOLUTIONDIR);
 	PCHAR templateBytes = (PCHAR) ReadBinary(templatePath, templateSize);
 	if (templateBytes == NULL || templateSize == 0) {
 		std::cout << "\n[!] Error on DLL template!\n" << std::endl;
