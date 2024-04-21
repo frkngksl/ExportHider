@@ -16,9 +16,11 @@ void PrintBanner() {
 
 void PrintHelp(char* binaryName) {
     const char* optionsString = R"(
-    -h | --help                             Show the help message.
-    -i | --input <Input Path>               Input path for the list of function names to be hidden. (Mandatory) 
-    -o | --output <Output Path>             Output path for the DLL template. (Mandatory) 
+    -h | --help                                 Show the help message.
+    -i | --input <Input Path>                   Input path for the list of function names to be hidden. (Mandatory) 
+    -o | --output <Output Path>                 Output path for the DLL template. (Mandatory) 
+    -n | --name <DLL Name>                      Name of the DLL for the Export Directory. (Mandatory)
+    -c | --count <Number of Other Functions>    Number of other exported functions that won't be hidden.
 )";
     std::cout << "Usage of " << binaryName << ":" << std::endl;
     std::cout << optionsString << std::endl;
@@ -44,8 +46,22 @@ bool ParseArgs(int argc, char* argv[], OPTIONS& configurationOptions) {
             }
             configurationOptions.outputPath = argv[i];
         }
+        else if (_strcmpi(argv[i], "-n") == 0 || _strcmpi(argv[i], "--name") == 0) {
+            i++;
+            if (i > argc) {
+                return false;
+            }
+            configurationOptions.dllName = argv[i];
+        }
+        else if (_strcmpi(argv[i], "-c") == 0 || _strcmpi(argv[i], "--count") == 0) {
+            i++;
+            if (i > argc) {
+                return false;
+            }
+            configurationOptions.numberOfOtherFunctions = atoi(argv[i]);
+        }
     }
-    if (configurationOptions.inputPath == NULL || configurationOptions.outputPath == NULL) {
+    if (configurationOptions.inputPath == NULL || configurationOptions.outputPath == NULL || configurationOptions.dllName == NULL) {
         return false;
     }
     return true;
