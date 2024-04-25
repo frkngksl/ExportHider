@@ -105,3 +105,25 @@ PCHAR ReplacePlaceholder(PCHAR originalContent, PCHAR replacement, const char* p
     HeapFree(GetProcessHeap(), 0, originalContent);
     return newMemory;
 }
+
+PCHAR AppendToOutput(PCHAR output, PCHAR text) {
+    // Calculate the length of the current output and the text to be appended
+    int outputLen = output ? strlen(output) : 0;
+    int textLen = strlen(text);
+    char* newOutput = NULL;
+    if (output == NULL) {
+        newOutput = (char*)HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY, (outputLen + textLen + 2) * sizeof(char));
+
+    }
+    else {
+        // Allocate memory for the new output string
+        newOutput = (char*)HeapReAlloc(GetProcessHeap(), 0, output, (outputLen + textLen + 2) * sizeof(char));
+    }
+    if (newOutput == NULL) {
+        std::cout << "HeapReAlloc Error: " << GetLastError() << std::endl;
+        return NULL;
+    }
+    // Append the text and a newline character to the new output string
+    strcat(newOutput, text);
+    return newOutput;
+}

@@ -53,14 +53,32 @@ PCHAR ReplaceFunctionNameArray(PCHAR templateBuffer, std::vector<PCHAR>& functio
 	return ReplacePlaceholder(templateBuffer, dynamicBuffer, "/*[PLACEHOLDERNAMEARRAY]*/");
 }
 
-PCHAR ReplaceFunctionAddressSet() {
-	return NULL;
+PCHAR ReplaceFunctionAddressSet(PCHAR templateBuffer, std::vector<PCHAR>& functionName) {
+	// 0D 0A 09 seperator
+	char tempBuffer[1024] = { 0 };
+	PCHAR dynamicBuffer = NULL;
+	int index = 0;
+	const char *templateString = "addressArray[oldFunctionSize + %d] = (DWORD)(((PBYTE) %s) - moduleAddress);\r\n\t";
+	for (int i = 0; i < functionName.size(); i++) {
+		sprintf(tempBuffer, templateString, index++, functionName[i]);
+		dynamicBuffer = AppendToOutput(dynamicBuffer, tempBuffer);
+		if (dynamicBuffer == NULL) {
+			std::cout << "Output Appending Error: " << GetLastError() << std::endl;
+			return NULL;
+		}
+		memset(tempBuffer, 0x00, 1024);
+	}
+	return ReplacePlaceholder(templateBuffer, dynamicBuffer, "/*[PLACEHOLDERFORNUMBEROFFUNCTIONADDRESS]*/");
 }
 
-PCHAR ReplaceNumberOfFunctionsSet() {
-	return NULL;
+PCHAR ReplaceNumberOfFunctionsSet(PCHAR templateBuffer, int numberOfFunctions) {
+	char tempBuffer[1024] = { 0 };
+	sprintf(tempBuffer, "newExportDirectory->NumberOfFunctions = oldFunctionSize + %d;", numberOfFunctions);
+	return ReplacePlaceholder(templateBuffer, tempBuffer, "/*[PLACEHOLDERFORNUMBEROFFUNCTIONSSET]*/");
 }
 
-PCHAR ReplaceNumberOfNamesSet() {
-	return NULL;
+PCHAR ReplaceNumberOfNamesSet(PCHAR templateBuffer, int numberOfNamedFunctions) {
+	char tempBuffer[1024] = { 0 };
+	sprintf(tempBuffer, "newExportDirectory->NumberOfNames = oldNameArraySize + %d;", numberOfNamedFunctions);
+	return ReplacePlaceholder(templateBuffer, tempBuffer, "/*[PLACEHOLDERFORNUMBEROFNAMESSET]*/");
 }

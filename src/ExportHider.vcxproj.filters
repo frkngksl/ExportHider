@@ -14,7 +14,7 @@
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
     <Filter Include="template">
-      <UniqueIdentifier>{fd8a4f8b-fa5e-4733-9cfc-0b06369070d9}</UniqueIdentifier>
+      <UniqueIdentifier>{f8052ae3-397f-41dc-9866-3652e56cb674}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -27,11 +27,11 @@
     <ClCompile Include="AuxFunctions.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="template\template.cpp">
-      <Filter>template</Filter>
-    </ClCompile>
     <ClCompile Include="ReplacementFunctions.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\template\template.cpp">
+      <Filter>template</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
