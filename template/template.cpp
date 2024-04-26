@@ -5,6 +5,24 @@ char namesBuffer[/*[PLACEHOLDERNAMESSIZE]*/] = { 0x0 };
 char exportTableBuffer[/*[PLACEHOLDEREXPORTTABLESIZE]*/] = { 0x0 };
 char nameOfTheDll[] /*[PLACEHOLDERFORDLLNAME]*/;
 
+void MyMemcpy(void* dest, const void* src, size_t n) {
+	unsigned char* d = (unsigned char*)dest;
+	const unsigned char* s = (const unsigned char*)src;
+
+	// Copy n bytes from source to destination
+	for (size_t i = 0; i < n; ++i) {
+		d[i] = s[i];
+	}
+}
+
+int MyStrcmp(const char* s1, const char* s2) {
+	while (*s1 && *s2 && *s1 == *s2) {
+		s1++;
+		s2++;
+	}
+	return *s1 - *s2;
+}
+
 void SetNameArray(PBYTE moduleAddress, PIMAGE_EXPORT_DIRECTORY newExportDirectory, PDWORD oldArray, int oldArraySize) {
 	const char *functionNames[] = /*[PLACEHOLDERNAMEARRAY]*/;
 	PDWORD nameArray = (PDWORD)(moduleAddress + newExportDirectory->AddressOfNames);
@@ -15,7 +33,7 @@ void SetNameArray(PBYTE moduleAddress, PIMAGE_EXPORT_DIRECTORY newExportDirector
 			nameArray[i] = oldArray[i];
 		}
 		else {
-			memcpy(namesBuffer + cursorForNameArea, (LPVOID)functionNames[j], strlen((const char*)functionNames[j]) + 1);
+			MyMemcpy(namesBuffer + cursorForNameArea, (LPVOID)functionNames[j], strlen((const char*)functionNames[j]) + 1);
 			nameArray[i] = (DWORD)((PBYTE)(namesBuffer + cursorForNameArea) - moduleAddress);
 			cursorForNameArea += (strlen((const char*)functionNames[j++]) + 1);
 		}
@@ -56,7 +74,7 @@ void SortExportedNameArray(PBYTE moduleAddress, PIMAGE_EXPORT_DIRECTORY newExpor
 		for (int j = 0; j < newExportDirectory->NumberOfNames - i - 1; j++) {
 			functionName1 = (PCHAR)(moduleAddress + nameArray[j]);
 			functionName2 = (PCHAR)(moduleAddress + nameArray[j + 1]);
-			if (strcmp(functionName1, functionName2) > 0) {
+			if (MyStrcmp(functionName1, functionName2) > 0) {
 				tempHolderForName = nameArray[j];
 				nameArray[j] = nameArray[j + 1];
 				nameArray[j + 1] = tempHolderForName;
