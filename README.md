@@ -49,11 +49,12 @@ TestFunction2
 TestFunction3
 ```
 
-Regarding the `-c | --count` parameter, if you don't want to hide all your exported functions (i.e. there are some functions exported with `__declspec(dllexport)` or .def file, and they appear in the Export Directory of the DLL file in the filesystem via PE File Viewers), just specify how many there are by using this parameter because the tool needs this information when making memory calculations.
+Regarding the `-c | --count` parameter, if you don't want to hide all your exported functions (i.e. there are some functions exported with `__declspec(dllexport)` or .def file, and they appear in the Export Directory of the DLL file in the filesystem via PE File Viewers), just specify how many there are by using this parameter because the tool needs this information when making memory calculations. 
 
-# Quick Demo
 
-[<img src="https://img.youtube.com/vi/ylYd89nvLEk/1.jpg" width="100%">](https://www.youtube.com/watch?v=ylYd89nvLEk "ExportHider Quick Demo")        
+# Quick Demo Video
+
+[<img src="https://github.com/frkngksl/ExportHider/assets/26549173/bf6a3513-2394-4cbd-8cd5-a77cab44d43f" width="100%">](https://www.youtube.com/watch?v=ylYd89nvLEk "ExportHider Quick Demo")        
 
 
 # Workarounds
