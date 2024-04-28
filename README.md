@@ -42,6 +42,12 @@ Usage of C:\Users\Public\DLLDemo\ExportHider.exe:
     -n | --name <DLL Name>                      Name of the DLL for the Export Directory. (Mandatory)
     -c | --count <Number of Other Functions>    Number of other exported functions that won't be hidden.
 ```
+Regarding the `-i | --input <Input Path>` parameter, you need to specify a path for the input file that stores the function names to be hidden line by line. The content of an example input file would be: 
+```
+TestFunction1
+TestFunction2
+TestFunction3
+```
 
 Regarding the `-c | --count` parameter, if you don't want to hide all your exported functions (i.e. there are some functions exported with `__declspec(dllexport)` or .def file, and they appear in the Export Directory of the DLL file in the filesystem via PE File Viewers), just specify how many there are by using this parameter because the tool needs this information when making memory calculations.
 
