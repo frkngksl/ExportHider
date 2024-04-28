@@ -53,6 +53,9 @@ Regarding the `-c | --count` parameter, if you don't want to hide all your expor
 
 # Quick Demo
 
+[<img src="https://img.youtube.com/vi/ylYd89nvLEk/1.jpg" width="100%">](https://www.youtube.com/watch?v=ylYd89nvLEk "ExportHider Quick Demo")        
+
+
 # Workarounds
 
 If you want to play with the technique, there are two interesting points that I encountered during the development of the project. You might need to know them before changing the project:
