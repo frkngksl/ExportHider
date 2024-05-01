@@ -1,3 +1,5 @@
+![image](https://github.com/frkngksl/ExportHider/assets/26549173/4b325f62-864f-45a5-80e6-558f997179ae)
+![image](https://github.com/frkngksl/ExportHider/assets/26549173/35db34fc-dded-4fd1-8468-10ab99de439b)
 # ExportHider
 ExportHider generates a C++ DLL template which contains a code stub that allows you to hide Exported Functions from the Export Directory of the DLL on the filesystem. After putting the function definitions and compiling the file, you won't see the hidden export functions through PE File Viewers like PEBear or CFF Explorer. However, since the code stub in the template recreates the Export Directory during runtime, legitimate GetProcAddress calls would still work. It might be useful for DLL Sideloading or DLL stagers. 
 
@@ -10,7 +12,7 @@ Normally, when you want to define an Exported Function in the DLL files (in C or
 
 When a process wants to use a function from a DLL file, Windows Loader simply parses this structure and imports the requested functions by using the `AddressOfFunctions`, `AddressOfNames`, `AddressOfNameOrdinals` arrays. 
 
-The specific routine for importing a function is explained by [ferreirasc's blog post](https://ferreirasc.github.io/PE-Export-Address-Table/) in detail, but shortly for a function imported by name, the Loader iterates the `AddressOfNames` array (values of this array are just RVA values) and searches the given name. Once, the loader has a match in the “i” position, it will refer to the ith index of `AddressOfNameOrdinals` array and get the ordinal associated with this function. Having the ordinal, the loader will refer to AddressOfFunctions on the ordinal value position to finally get the RVA associated with the imported function.
+The specific routine for importing a function is explained by [ferreirasc's blog post](https://ferreirasc.github.io/PE-Export-Address-Table/) in detail, but shortly for a function imported by name, the Loader iterates the `AddressOfNames` array (values of this array are just RVA values) and searches the given name. Once, the loader has a match in the “i” position, it will refer to the ith index of `AddressOfNameOrdinals` array and get the ordinal associated with this function. Having the ordinal, the loader will refer to `AddressOfFunctions` on the ordinal value position to finally get the RVA associated with the imported function.
 
 <p align="center">
   <img src="https://github.com/frkngksl/ExportHider/assets/26549173/59d616e4-f00d-4e07-8f17-2f319097945e">
