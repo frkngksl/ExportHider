@@ -1,4 +1,3 @@
-
 # ExportHider
 ExportHider generates a C++ DLL template which contains a code stub that allows you to hide Exported Functions from the Export Directory of the DLL on the filesystem. After putting the function definitions and compiling the file, you won't see the hidden export functions through PE File Viewers like PEBear or CFF Explorer. However, since the code stub in the template recreates the Export Directory during runtime, legitimate GetProcAddress calls would still work. It might be useful for DLL Sideloading or DLL stagers. 
 
