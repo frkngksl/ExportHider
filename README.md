@@ -67,3 +67,7 @@ If you want to play with the technique, there are two interesting points that I 
 # References
 - https://rioasmara.com/2021/10/10/analyze-dll-export-with-pe-bear/
 - https://ferreirasc.github.io/PE-Export-Address-Table/
+
+## Disclaimer
+
+For authorized security testing only. Misuse of this tool against systems without explicit permission is illegal.
